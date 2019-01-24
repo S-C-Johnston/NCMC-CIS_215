@@ -1,0 +1,8 @@
+Relation: Formal language for a table in two dimensions, which has rows
+and columns.
+
+Tuple: Formal language for a row. Taken from mathematics language,
+meaning a finite and ordered list of elements. Likewise, tuples have a
+finite number of attributes in a specific order.
+
+Attribute: Formal language for column.
