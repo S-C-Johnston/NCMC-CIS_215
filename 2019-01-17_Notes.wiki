@@ -1,0 +1,42 @@
+Objectives
+==========
+
+ - Understand the concepts of the conceptual data model and relational
+   data model
+ - Understand the process of normalization
+ - Design a database using Entity-Relationship Diagram
+ - Run simple query, nested query, and complex query
+
+With any small amount of luck, we should receive a certification by the
+end of class, no extra fees. This is done through ciw.ucertify.com
+
+Lesson proper
+=============
+
+Database: A formally defined and arranged set of persistent information
+stored by a computer program.
+
+_Formally Arranged_: The format of the data and how it relates to itself
+are clearly defined.
+
+_Persistent_: The data should only undergo changes by an authorized user
+or program, its integrity should not be compromised. 
+
+Flat file databases stored all their information in one file, and
+applications designed to interact with it would have much of that
+structure baked into its program. Suffice to say, flat files = no bueno.
+
+Other methods have come to the fore between flat-files and relational
+databases.
+
+Relational databases are designed to reduce redundancy, improve
+consistency, and detach application logic from the database, among other
+objectives.
+
+A system catalog describes the database structure and format.
+
+DBMS: DataBase Management System. Software which manages the data
+through an interface, to the ends of improving concurrency, increasing
+the ability to backup and restore, and through adherence to standards,
+improving productivity. It comes with the costs of complexity, software
+licensing fees, and the increased cost from failure.

@@ -1,0 +1,15 @@
+Relational database
+===================
+
+Named for the relation, which houses in a data structure which in many
+ways resembles a two-dimensional array. Each row or tuple is a single
+entity, and each column, or attribute, represents values of defined
+domains. A Person relation may have attributes such as id, name, date of
+birth, etc.
+
+ - Degree: # of attributes a relation contains
+ - Cardinality: # of tuples in a relation. Also commonly used to
+   describe the interactions of different relations, in the form of 1:1,
+   1:m, and n:m.
+   
+See the [[glossary]]
