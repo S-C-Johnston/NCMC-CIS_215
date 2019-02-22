@@ -13,3 +13,28 @@ birth, etc.
    1:m, and n:m.
    
 See the [[glossary]]
+
+A base table is the actual table stored in a database. A virtual table,
+by contrast, is not stored in that format, but constructed from other
+data and held in memory for use.
+
+[[Primary keys]] uniquely identify tuples in a relation. A foreign key
+in a tuple identifies a primary key from another tuple.
+
+Database languages
+------------------
+
+SQL is a superset of some smaller formal languages, which mostly don't
+interact and are fairly self-contained. The subset languages include:
+
+ - Data Definition Language (DDL): A set of commands that create items
+   requiring strict definition in a database. These include tables,
+   views, indices, and the schema.
+
+ - Data Manipulation Language (DML): Commands which enable the
+   retrieval, insertion, modification and deletion of data.
+
+ - Data Control Language (DCL): A formal language for defining access
+   rights for users and logins on a database.
+
+

@@ -1,8 +1,24 @@
-Relation: Formal language for a table in two dimensions, which has rows
-and columns.
+Relation: Formal language for a table in two dimensions, which has
+tuples (rows) and attributes (columns).
 
 Tuple: Formal language for a row. Taken from mathematics language,
 meaning a finite and ordered list of elements. Likewise, tuples have a
 finite number of attributes in a specific order.
 
-Attribute: Formal language for column.
+Attribute: Formal language for column. Contains a value in a defined
+domain, with the constraint that an attribute can't be out of domain.
+
+Domain: "A set of permissible values". Formal language for describing a
+data type, which often goes into detail to both the broad kind and its
+specifics, For example, a person's name is not just a string, but a
+string containing only alphabetical characters and likely smaller than
+25 characters.
+
+Degree: The number of attributes in a given relation.
+
+Cardinality: Multiple uses. The first of which I became aware is the
+interaction between relations, such that a tuple is said to be related
+to another in cardinality of 1:1, 1:many, or n:m. The use described in
+lesson 2 is of the number of entities in a table.
+
+Entity: The "real" element about which data needs to be stored.
