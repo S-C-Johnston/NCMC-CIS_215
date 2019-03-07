@@ -1,6 +1,15 @@
 #!/usr/bin/env dot -Tpng -O
 
-digraph <> {
+digraph normalization {
+
+	subgraph cluster_1nf {
+		label = "First normal form";
+		order_number -> {date, customer_number, customer_name,
+			customer_address, city_and_country};
+
+		product_number -> {product_description, product_price};
+		order_number_AND_product_number -> product_quantity;
+	}
 
 }
 
