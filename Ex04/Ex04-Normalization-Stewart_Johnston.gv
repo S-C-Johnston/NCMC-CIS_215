@@ -4,11 +4,16 @@ digraph normalization {
 
 	subgraph cluster_1nf {
 		label = "First normal form";
-		order_number -> {date, customer_number, customer_name,
-			customer_address, city_and_country};
+		o_number [label="*order_number"];
+		c_number [label="*customer_number"];
+		o_number -> {date, c_number, c_name,
+			c_address, city_and_country};
 
-		product_number -> {product_description, product_price};
-		order_number_AND_product_number -> product_quantity;
+		p_number [label="*product_number"];
+		p_number -> {p_description, p_price};
+		o_number_AND_p_number [label=
+			"*order_number, *product_number"];
+		o_number_AND_p_number -> p_quantity;
 	}
 
 }
