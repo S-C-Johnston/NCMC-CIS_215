@@ -33,14 +33,52 @@ The tenets of first normal form include:
 \begin{enumerate}
 	\item Atomic values for any given field of any given tuple. In
 		more plain English, for any intersection of row and
-		column, the value should be immediately usable for
-		business rules without further computation on that
-		value.
+		column, therein will be only one value of the
+		attribute's type or domain.
+		
+		It is often phrased as having ``No Repeating Groups''.
+		The important part of this is consideration is that if
+		multiple pieces of data are introduced with the same
+		type/domain, they must be uniquely identifiable in
+		the row without asking for the nth instance of that
+		attribute.  ``Address_1'' and ``Address_2'', for
+		example, would not be appropriate.  However,
+		``shipping_address'' and ``billing_address'' may be
+		appropriate, depending on the business rules and the
+		cardinality of the relationship.
+		
+		A 1:n cardinality, for instance, would not be
+		appropriate to denormalize in this way. If any one
+		entity had an exact number of named variants of the same
+		domain (e.g. work and cell number), pulling them into
+		the main relation may be appropriate. Your mileage may
+		vary.
 
-		Example: One may have both a work and cell phone number,
-		but in storing the data about this in a relational
-		database, a column in first normal form will contain
-		only one value of its type.
+	\item Each tuple in the relation must be uniquely identifiable
+		with a primary key. A primary key can be an arbitrary
+		auto-incrementing value, which is quite often the case.
+		A primary key can be composed of multiple pieces of a
+		tuple's data, as long as this data will never collide on
+		multiple tuples. It is recommended that this primary key
+		be composed of values which are likely never to change
+		but also do not have confidentiality/security
+		requirements. (e.g., a birth date in combination with
+		other data may be appropriate, but a social security
+		number would not be).
+
+	\item Groups of similar data should be wrapped in their own
+		tables, \emph{especially} if they have any cardinality
+		other than 1:1 with any other data belonging to the same
+		entity.
+
+		In the exercise, individual products have a many:many
+		cardinality with invoices, so products are best stored
+		in their own table. The quantity of any given product on
+		any given invoice is best stored as an attribute of an
+		associative table between the invoice primary key and
+		the product primary key, since those are the
+		determinants of the quantity.
+
 \end{enumerate}
 
 \includegraphics{Ex04-Normalization-Stewart_Johnston.gv.png}
