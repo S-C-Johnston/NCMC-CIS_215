@@ -1,0 +1,48 @@
+%&tex
+\documentclass{article}
+
+\usepackage{graphicx}[draft]
+\usepackage{color}
+\graphicspath{{./img/}}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{listings}
+
+\title{Exercise 04 -- Normalization}
+\author{Stewart Johnston\\
+  {CIS 215 -- Database Design}\\
+  {NCMC}\\
+  {\texttt{johnstons1@student.ncmich.edu}}
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+The invoice given us to normalize the data and put into a relational
+database is not naturally in a normalized form. Several different tables
+need to be split off in order to accurately model the data while also
+making it simple to work on.
+
+From \includegraphics{norm5.jpg}
+
+The tenets of first normal form include:
+\begin{enumerate}
+	\item Atomic values for any given field of any given tuple. In
+		more plain English, for any intersection of row and
+		column, the value should be immediately usable for
+		business rules without further computation on that
+		value.
+
+		Example: One may have both a work and cell phone number,
+		but in storing the data about this in a relational
+		database, a column in first normal form will contain
+		only one value of its type.
+\end{enumerate}
+
+\includegraphics{Ex04-Normalization-Stewart_Johnston.gv.png}
+
+\end{document}
