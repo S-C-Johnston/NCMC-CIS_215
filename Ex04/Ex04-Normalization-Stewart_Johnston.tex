@@ -8,7 +8,8 @@
 \usepackage{hyperref}
 \usepackage{subcaption}
 \usepackage{float}
-\usepackage{listings}
+
+\floatplacement{figure}{htb}
 
 \title{Exercise 04 -- Normalization}
 \author{Stewart Johnston\\
@@ -27,7 +28,13 @@ database is not naturally in a normalized form. Several different tables
 need to be split off in order to accurately model the data while also
 making it simple to work on.
 
-From \includegraphics{norm5.jpg}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{norm5.jpg}
+	\caption{Order Form serving as source document for analysis}
+\end{figure}
+
+\section{First Normal Form}
 
 The tenets of first normal form include:
 \begin{enumerate}
@@ -41,9 +48,9 @@ The tenets of first normal form include:
 		multiple pieces of data are introduced with the same
 		type/domain, they must be uniquely identifiable in
 		the row without asking for the nth instance of that
-		attribute.  ``Address_1'' and ``Address_2'', for
+		attribute.  ``Address\_1'' and ``Address\_2'', for
 		example, would not be appropriate.  However,
-		``shipping_address'' and ``billing_address'' may be
+		``shipping\_address'' and ``billing\_address'' may be
 		appropriate, depending on the business rules and the
 		cardinality of the relationship.
 		
@@ -72,15 +79,60 @@ The tenets of first normal form include:
 		entity.
 
 		In the exercise, individual products have a many:many
-		cardinality with invoices, so products are best stored
-		in their own table. The quantity of any given product on
-		any given invoice is best stored as an attribute of an
-		associative table between the invoice primary key and
-		the product primary key, since those are the
-		determinants of the quantity.
+		cardinality with order forms, so products are best
+		stored in their own table. The quantity of any given
+		product on any given order form is best stored as an
+		attribute of an associative table between the order form
+		primary key and the product primary key, since those are
+		the determinants of the quantity.
 
 \end{enumerate}
 
-\includegraphics{Ex04-Normalization-Stewart_Johnston.gv.png}
+To meet this criteria for first normal form, I examined only the
+cardinality between pieces of data and how they related as entities to
+the order form as an entity.
+
+\section{Second Normal Form}
+
+Second Normal Form requires firstly that data be in First Normal Form,
+and additionally that non-key data be completely functionally dependent
+on the primary key. A Functional Dependency occurs between two
+attributes when for any given value of the determinant, the dependent
+will only have one possible value at any given time. So to say,
+Functional Dependency is like a one-way 1:1 cardinality between
+individual attributes of a relation. The reverse need not be true; a
+duplicate value of dependent can occur in many places, being referenced
+by different determinants, but for any value of determinant, only one
+value of dependant exists.
+
+A Transitive Dependency is like the transitive property in logic or
+algebra. E.g, if A implies B, which implies C, then by the transitive
+property means A implies C.
+
+Transitive Functional Dependencies are legal in 2NF, so no structural
+changes need to be made to the tables. However, it is useful to
+recognize where transitive functional dependencies are, which can be
+seen in the Second Normal Form subgraph. Any node which has arrows into
+and out of it is a point of transitive dependency.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{Ex04-Normalization-Stewart_Johnston.png}
+	\caption{Dependency graph for First, Second, and Third normal
+	forms}
+\end{figure}
+
+\section{Third Normal Form}
+
+Third Normal Form, like the normal forms before it, requires that data
+satisfy the prior Normal Form, and that no attributes which are not part
+of the primary key have a Transitive Dependency on the primary key. To
+that end, the changes made to the structure of the data to make it
+comply with 3NF are to move any transitive dependencies into their own
+relations. In the Exercise, this can be done by splitting off the
+customer number and its dependents -- name, address, and city/country --
+into their own relation. Then the customer number becomes the primary
+key for its own relation, and it is referenced as a foreign key by the
+order form relation.
 
 \end{document}

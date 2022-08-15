@@ -1,24 +1,143 @@
+#!/usr/bin/env dot -Tpng -O
+
 digraph ProAudio {
+	rankdir="LR";
+
 	Customers [shape="plain",
 		  label=<<table cellspacing="0"
 			  cellborder="0">
 			  <tr><td>Customers</td></tr>
 			  <hr/>
-			  <tr><td>*c_num</td></tr>
-			  <tr><td>c_first_name</td></tr>
-			  <tr><td>c_last_name</td></tr>
-			  <tr><td>c_street</td></tr>
-			  <tr><td>c_city</td></tr>
-			  <tr><td>c_state</td></tr>
-			  <tr><td>c_zip</td></tr>
-			  <tr><td>c_phone</td></tr>
-			  <tr><td>c_cc_num</td></tr>
-			  <tr><td>c_exp_date</td></tr>
+			  <tr><td>*c_num</td><td>integer</td></tr>
+			  <tr><td>c_first_name</td><td>string</td></tr>
+			  <tr><td>c_last_name</td><td>string</td></tr>
+			  <tr><td>c_street</td><td>string</td></tr>
+			  <tr><td>c_city</td><td>string</td></tr>
+			  <tr><td>c_state</td><td>string</td></tr>
+			  <tr><td>c_zip</td><td>string</td></tr>
+			  <tr><td>c_phone</td><td>string</td></tr>
+			  <tr><td>c_cc_num</td><td>string</td></tr>
+			  <tr><td>c_exp_date</td><td>date</td></tr>
 			  </table>>
 	];
+
+	Distributors [shape="plain",
+		     label=<<table cellspacing="0"
+			     cellborder="0">
+			     <tr><td>Distributors</td></tr>
+			     <hr/>
+			     <tr><td>*d_num</td><td>integer</td></tr>
+			     <tr><td>d_name</td><td>string</td></tr>
+			     <tr><td>d_street</td><td>string</td></tr>
+			     <tr><td>d_city</td><td>string</td></tr>
+			     <tr><td>d_state</td><td>string</td></tr>
+			     <tr><td>d_zip</td><td>string</td></tr>
+			     <tr><td>d_phone</td><td>string</td></tr>
+			     <tr><td>d_fax</td><td>string</td></tr>
+			     <tr><td>d_contact</td><td>string</td></tr>
+			     <tr><td>d_contact_extension</td><td>integer</td></tr>
+			     </table>>
+	];
+
+	Orders [shape="plain",
+	       label=<<table cellspacing="0"
+		       cellborder="0">
+		       <tr><td>Orders</td></tr>
+		       <hr/>
+		       <tr><td>*o_num</td><td>integer</td></tr>
+		       <tr><td>c_num</td><td>integer</td></tr>
+		       <tr><td>o_date</td><td>date</td></tr>
+		       <tr><td>o_filled</td><td>boolean</td></tr>
+		       </table>>
+	];
+
+	Orders -> Customers [dir="both", arrowhead="teetee",
+	       arrowtail="crowodot"];
+
+	Items [shape="plain",
+	      label=<<table cellspacing="0"
+		      cellborder="0">
+		      <tr><td>Items</td></tr>
+		      <hr/>
+		      <tr><td>*i_num</td><td>integer</td></tr>
+		      <tr><td>i_title</td><td>string</td></tr>
+		      <tr><td>d_num</td><td>integer</td></tr>
+		      <tr><td>i_price</td><td>decimal</td></tr>
+		      <tr><td>i_release_date</td><td>date</td></tr>
+		      <tr><td>i_genre</td><td>string</td></tr>
+		      </table>>
+	];
+
+	Items -> Orders [dir="both", arrowhead="crowodot",
+	      arrowtail="crowtee"];
+
+	Items -> Distributors [dir="both", arrowhead="teetee",
+	      arrowtail="crowodot"];
+
+	Musicians [shape="plain",
+		  label=<<table cellspacing="0"
+			  cellborder="0">
+			  <tr><td>Musicians</td></tr>
+			  <hr/>
+			  <tr><td>*m_num</td><td>integer</td></tr>
+			  <tr><td>m_name</td><td>string</td></tr>
+			  </table>>
+	];
+
+	Musicians -> Items [dir="both", arrowhead="crowtee",
+		  arrowtail="crowtee"];
+
+	Producers [shape="plain",
+		  label=<<table cellspacing="0"
+			  cellborder="0">
+			  <tr><td>Producers</td></tr>
+			  <hr/>
+			  <tr><td>*p_num</td><td>integer</td></tr>
+			  <tr><td>p_name</td><td>string</td></tr>
+			  </table>>
+	];
+
+	Producers -> Items [dir="both", arrowhead="crowtee",
+		  arrowtail="crowtee"];
+
+	Sales_Reps [shape="plain",
+		   label=<<table cellspacing="0"
+			   cellborder="0">
+			   <tr><td>Sales_Reps</td></tr>
+			   <hr/>
+			   <tr><td>*s_num</td><td>integer</td></tr>
+			   <tr><td>s_name</td><td>string</td></tr>
+			   </table>>
+	];
+
+	Locations [shape="plain",
+		  label=<<table cellspacing="0"
+			  cellborder="0">
+			  <tr><td>Locations</td></tr>
+			  <hr/>
+			  <tr><td>*l_num</td><td>integer</td></tr>
+			  <tr><td>l_street</td><td>string</td></tr>
+			  <tr><td>l_city</td><td>string</td></tr>
+			  <tr><td>l_state</td><td>string</td></tr>
+			  <tr><td>l_zip</td><td>string</td></tr>
+			  <tr><td>l_phone</td><td>string</td></tr>
+			  <tr><td>l_fax</td><td>string</td></tr>
+			  </table>>
+	];
+
+	Sales_Reps -> Locations [dir="both", arrowhead="teetee",
+		   arrowtail="crowtee"];
+
+	Orders -> {Locations, Sales_Reps} [dir="both",
+	       arrowtail="crowodot", arrowhead="teetee"];
+
 }
 
-//<> [label="<table>
+//<> [shape="plain",
+//label=<<table cellspacing="0"
+//cellborder="0">
 //<tr><td><></td></tr>
-//</table>
-//"];
+//<hr/>
+//<tr><td><></td></tr>
+//</table>>
+//];

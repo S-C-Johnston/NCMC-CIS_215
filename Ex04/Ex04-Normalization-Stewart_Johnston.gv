@@ -1,6 +1,7 @@
-#!/usr/bin/env dot -Tpng -O
+#!/usr/bin/env dot -Tsvg -O
 
 digraph normalization {
+	graph [size="8.5,11" ratio="auto"];
 
 	subgraph cluster_1nf {
 		label = "First normal form";
@@ -14,6 +15,57 @@ digraph normalization {
 		o_number_AND_p_number [label=
 			"*order_number, *product_number"];
 		o_number_AND_p_number -> p_quantity;
+	}
+
+	subgraph cluster_2nf {
+		label = "Second normal form";
+		o_number_2 [label="*order_number"];
+		c_number_2 [label="*customer_number"];
+		date_2 [label="date"];
+		c_number_2 [label="*c_number"];
+		c_name_2 [label="c_name"];
+		c_address_2 [label="c_address"];
+		city_and_country_2 [label="city_and_country"];
+		o_number_2 -> {c_number_2, date_2};
+
+		c_number_2 -> {c_name_2, c_address_2,
+			city_and_country_2};
+
+		p_number_2 [label="*product_number"];
+		p_description_2 [label="p_description"];
+		p_price_2 [label="p_price"];
+		p_number_2 -> {p_description_2, p_price_2};
+
+		o_number_AND_p_number_2 [label=
+			"*order_number, *product_number"];
+		p_quantity_2 [label="p_quantity"];
+		o_number_AND_p_number_2 -> p_quantity_2;
+	}
+
+	subgraph cluster_3nf {
+		label = "Third normal form";
+		o_number_3 [label="*order_number"];
+		c_number_3 [label="*customer_number"];
+		date_3 [label="date"];
+		c_number_3 [label="c_number"];
+		c_name_3 [label="c_name"];
+		c_address_3 [label="c_address"];
+		city_and_country_3 [label="city_and_country"];
+		o_number_3 -> {c_number_3, date_3};
+
+		c_number_4 [label="*c_number"];
+		c_number_4 -> {c_name_3, c_address_3,
+			city_and_country_3};
+
+		p_number_3 [label="*product_number"];
+		p_description_3 [label="p_description"];
+		p_price_3 [label="p_price"];
+		p_number_3 -> {p_description_3, p_price_3};
+
+		o_number_AND_p_number_3 [label=
+			"*order_number, *product_number"];
+		p_quantity_3 [label="p_quantity"];
+		o_number_AND_p_number_3 -> p_quantity_3;
 	}
 
 }
