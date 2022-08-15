@@ -1,0 +1,226 @@
+#!/usr/bin/env dot -Tpng -O
+
+digraph flower_entities {
+	rankdir=LR;
+
+	crop [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Crop</td></tr>
+	<hr/>
+	<tr><td>*crop_ID</td></tr>
+	<tr><td>FK species_ID</td></tr>
+	<tr><td>FK flower_bed_ID</td></tr>
+	<tr><td>planted_date</td></tr>
+	<tr><td>harvest_date</td></tr>
+	<tr><td>is_harvested</td></tr>
+	<tr><td>amount_planted</td></tr>
+	<tr><td>total_count</td></tr>
+	<tr><td>derived_success_rate</td></tr>
+	<tr><td>wholesale_price</td></tr>
+	<tr><td>retail_price</td></tr>
+	</table>>
+	];
+	
+	flower_bed [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Flower bed</td></tr>
+	<hr/>
+	<tr><td>*flower_bed_ID</td></tr>
+	<tr><td>dimensions_sq_ft</td></tr>
+	<tr><td>shade</td></tr>
+	<tr><td>soil_n_nitrogen</td></tr>
+	<tr><td>soil_p_phosphorous</td></tr>
+	<tr><td>soil_k_potassium</td></tr>
+	<tr><td>is_in_greenhouse</td></tr>
+	</table>>
+	];
+
+	crop -> flower_bed [dir=both, arrowtail=crowodot,
+	     arrowhead=teetee];
+
+
+	species [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Species</td></tr>
+	<hr/>
+	<tr><td>*species_ID</td></tr>
+	<tr><td>FK crop_rotation_category</td></tr>
+	<tr><td>FK environment_needs</td></tr>
+	<tr><td>seed_cost</td></tr>
+	<tr><td>wholesale_price</td></tr>
+	<tr><td>retail_price</td></tr>
+	<tr><td>sq_ft_needs</td></tr>
+	<tr><td>trellising_needs</td></tr>
+	<tr><td>vegetative_phase</td></tr>
+	<tr><td>flowering_phase</td></tr>
+	<tr><td>maturity_period</td></tr>
+	<tr><td>success_rate_avg</td></tr>
+	<tr><td>stems_per_bundle_avg</td></tr>
+	</table>>
+	];
+
+	crop -> species [dir=both, arrowtail=crowodot,
+	     arrowhead=teetee];
+
+	rotation_category [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Rotation Category</td></tr>
+	<hr/>
+	<tr><td>*category_ID</td></tr>
+		<tr><td>name</td></tr>
+	<tr><td>period</td></tr>
+	<tr><td>type</td></tr>
+	</table>>
+	];
+
+	species -> rotation_category [dir=both, arrowtail=crowtee,
+		arrowhead=teetee];
+
+	environment_needs [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Environment Needs</td></tr>
+	<hr/>
+	<tr><td>*environment_ID</td></tr>
+	<tr><td>watering_time</td></tr>
+	<tr><td>light_needs</td></tr>
+	<tr><td>temperature_low</td></tr>
+	<tr><td>temperature_high</td></tr>
+	<tr><td>soil_temperature</td></tr>
+	<tr><td>soil_n_nitrogen</td></tr>
+	<tr><td>soil_p_phosphorous</td></tr>
+	<tr><td>soil_k_potassium</td></tr>
+	</table>>
+	];
+
+	species -> environment_needs [dir=both, arrowtail=crowtee,
+		arrowhead=teetee];
+
+	tasks [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Tasks</td></tr>
+	<hr/>
+	<tr><td>*task_ID</td></tr>
+	<tr><td>period</td></tr>
+	<tr><td>Instructions</td></tr>
+	</table>>
+	];
+
+	flowerbed_tasks [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Flowerbed Tasks</td></tr>
+	<hr/>
+	<tr><td>* FK flower_bed_ID</td></tr>
+	<tr><td>* FK task_ID</td></tr>
+	<tr><td>FK assignee_ID</td></tr>
+	<tr><td>date_assigned</td></tr>
+	<tr><td>date_completed</td></tr>
+	</table>>
+	];
+
+	flowerbed_tasks -> {flower_bed, tasks} [dir=both,
+			arrowtail=crowodot, arrowhead=teetee];
+
+	nutrients [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Nutrients</td></tr>
+	<hr/>
+	<tr><td>*nutrient_ID</td></tr>
+	<tr><td>FK product_ID</td></tr>
+	<tr><td>weight_per_sq_ft</td></tr>
+	</table>>
+	];
+
+	external_products [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>External Products</td></tr>
+	<hr/>
+	<tr><td>*product_ID</td></tr>
+	<tr><td>FK product_category</td></tr>
+	<tr><td>quantity_in_stock</td></tr>
+	<tr><td>brand</td></tr>
+	<tr><td>cost_per_unit</td></tr>
+	<tr><td>n_nitrogen</td></tr>
+	<tr><td>p_phosphorous</td></tr>
+	<tr><td>k_potassium</td></tr>
+	<tr><td>description</td></tr>
+	</table>>
+	];
+
+	nutrients -> external_products [dir=both, arrowtail=crowtee,
+		  arrowhead=teetee];
+
+	product_category [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Product Category</td></tr>
+	<hr/>
+	<tr><td>*category_ID</td></tr>
+	<tr><td>name</td></tr>
+	<tr><td>description</td></tr>
+	</table>>
+	];
+
+	external_products -> product_category [dir=both,
+			  arrowtail=crowtee, arrowhead=teetee];
+
+	species_nutrients [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Species' Nutrients</td></tr>
+	<hr/>
+	<tr><td>* FK species_ID</td></tr>
+	<tr><td>* FK nutrient_ID</td></tr>
+	<tr><td>* FK phase_category_ID</td></tr>
+	</table>>
+	];
+
+	phase_category [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Phase Category</td></tr>
+	<hr/>
+	<tr><td>*phase_category_ID</td></tr>
+	<tr><td>name</td></tr>
+	<tr><td>description</td></tr>
+	</table>>
+	];
+
+	species_nutrients -> {species, nutrients, phase_category}
+	[dir=both, arrowtail=crowtee, arrowhead=teetee];
+
+	species_phase_period [shape="plain",
+	label=<<table cellspacing="0"
+	cellborder="0">
+	<tr><td>Species Phase Period</td></tr>
+	<hr/>
+	<tr><td>* FK species_ID</td></tr>
+	<tr><td>* FK phase_category_ID</td></tr>
+	<tr><td>period</td></tr>
+	</table>>
+	];
+
+	species_phase_period -> {species, phase_category} [dir=both,
+			     arrowtail=crowtee, arrowhead=teetee];
+	
+
+}
+
+//Per graphviz docs, html-based records
+//<> [shape="plain",
+//label=<<table cellspacing="0"
+//cellborder="0">
+//<tr><td><></td></tr>
+//<hr/>
+//<tr><td><></td></tr>
+//</table>>
+//];
+
