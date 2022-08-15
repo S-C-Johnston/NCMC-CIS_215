@@ -1,0 +1,19 @@
+A primary key is important for unambiguously selecting a given tuple.
+Of the most convenient and common means of selecting a primary key, an
+arbitrary number is chief among them; this can be done by randomly
+generating ids not having been used ever before, or by auto-incrementing
+over time. Auto-incrementing values are typically faster and easier to
+implement.
+
+A primary key can be composed of multiple columns. This is a composite
+key.
+
+Best practices
+--------------
+
+ - Should have a value that is extremely unlikely to be null
+ - Should be a value that will never change
+ - Should not, despite the temptation, be made of meaningful data, if
+   possible.
+ - Should be made of the least number of columns necessary to ensure
+   uniqueness

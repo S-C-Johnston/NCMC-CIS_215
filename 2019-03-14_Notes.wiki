@@ -1,0 +1,20 @@
+Physical Design
+---------------
+
+Physical Database Design is performed after the conceptual design has
+been completed, and requirements for data is understood.
+
+Physical Design considerations for choosing and designing for any
+particular RDBMS inlude:
+- How base relations are created in the DBMS
+- Support for primary and foreign keys
+- Support for definition of requisitie data. Does it support NOT NULL?
+- Support for predefined domains
+- Support for enterprise constraints
+
+The dialect of SQL and its DDL component may vary based on the RDBMS,
+but ANSI or ISO SQL standards are likely to be well supported. If the
+RDBMS supports a standard, there will be nothing lost by using it, but
+some platform specific features may not be used.
+
+

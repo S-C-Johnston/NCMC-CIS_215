@@ -1,0 +1,82 @@
+== Questions ==
+- Q: Indexing?
+	- A: Indexes are built frequently. Example: huge memory grid
+	  composed of 31 servers each with 32 gigs of RAM; unindexed
+	  queries can take minutes, but indexing may take only a handful
+	  of milliseconds.
+	- An index is really just kind of a lookup table which is
+	  managed by the RDBMS.
+	- If a hashing algorithm can be used to both store and retrieve
+	  by the key and map that to a specific server, so that requests
+	  on that key can be even faster.
+	- Using some platforms, the computation can be done on the
+	  servers in some kind of compiled language.
+
+- Q: How often new design is needed?
+	- A: Data enabler team helps to make the data design process
+	  abstracted from other developers. Even in mature data domains,
+	  some changes may occur which up-end the models. Regulation is
+	  often a motivating factor in changing the data model.
+	- You never know what's going to change.
+	- Many different parties and stakeholders may have requests. The
+	  development team may and is en
+
+- Q: Scalability? (Andrew Bastien)
+	- A: Gemfire, Apache Geode. Gemfire can be set up as an
+	  in-memory data-grid. Apache Geode is an open-source product,
+	  used frequently for performance needs.
+- Q: Foreign Key constraints in the DB vs in the Application. (Andrew
+  Bastien)
+	- A: Depends on the needs of the application. The major benefit
+	  of FK constraints is that the data model can be accurately
+	  reflected in the way the data is stored, and that it enforces
+	  consistency all the time always. Moving this out of the DB can
+	  make this faster, but may mean that consistency is "eventual".
+- Q: Favorite development stack? (gregb)
+	- A: Java and Kotlin stack for Android development is convenient
+	  for the consistency. Type-safety is a big issue, and using a
+	  language that needs to compile can prevent at least some junk
+	  from making its way into the application or api.
+	- A: About languages in general. Bash scripting is everywhere,
+	  presumably because of the proliferation of linux as the server
+	  platform.
+
+== Slides ==
+- Ryan's role: software development specialist. Deals much with
+  APIs, web and mobile applications, and data services.
+- For their business structure, the developers have a lot of autonomy to
+  develop tools and gather information.
+- Uses the Extreme Programming methodology.
+- Uses Test Driven Development.
+	+ Write tests first.
+	+ Only write the code you need.
+	+ The tests are the documentation.
+	+ Fail fast and loudly.
+- Work in pairs frequently. One person focuses more on the programming
+  itself, and the other focuses on the design and engineering.
+- SLA: Service Level Agreement. The back-end should respond within a
+  fraction of a second.
+- Usually take the approach of one DB per application. When multiple
+  applications require the same data, cost of coordination is incurred.
+- Microservice architecture demands that the applications connect to the
+  APIs rather than directly to the DB. This helps to separate concerns
+  of data storage and application logic.
+- Still need to expose the data by some means.
+- Micro-data-services structure implies that the microservices talk to a
+  read-only cache, which themselves talk to a service in the backend
+  which extracts data from the DB and packages it in a way which is more
+  native to the microservice.
+- ETL: Extract -> Transform -> Load pipeline. The DB is queried by an
+  extractor, which pushes that data to a queue, to which processors
+  listen and transform the data for a cache.
+  - Major benefit is that different deployments of the same kind of
+    application which need the same data can be updated as needed, if
+    the new data object model remains backwards compatible. The cost
+    of coordination for using both a web and a mobile application can be
+    reduced.
+- Message model: frequently implemented in JSON. As long as everyone
+  involved can agree on the format of the message, interoperation can be
+  achieved.
+- XSD: An XML which represents a canonical model, and can be used to
+  generate imperative code to relate the data into a relational model
+  and back.
