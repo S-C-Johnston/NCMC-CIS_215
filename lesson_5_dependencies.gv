@@ -1,0 +1,21 @@
+#!/usr/bin/env dot -Tpng -O
+
+digraph <> {
+	c_id_and_p_num -> r_start, r_end;
+	c_id -> c_name;
+	p_num -> p_address, city, state, zip, rent, owner_num, owner;
+	owner_num -> owner;
+	c_id_and_r_start -> p_num, p_address, city, state, zip, r_end, rent, owner_num, owner;
+	p_num_and_r_start -> c_id, c_name, r_end ;
+}
+
+//Per graphviz docs, html-based records
+//<> [shape="plain",
+//label=<<table cellspacing="0"
+//cellborder="0">
+//<tr><td><></td></tr>
+//<hr/>
+//<tr><td><></td></tr>
+//</table>>
+//];
+
